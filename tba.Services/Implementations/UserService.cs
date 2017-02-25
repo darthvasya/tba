@@ -23,6 +23,17 @@ namespace tba.Services.Implementations
             this._userRepository = userRepository;
         }
 
+        public void CreateUser(User user)
+        {
+
+            if (user != null)
+            {
+                _userRepository.Add(user);
+                _unitOfWork.Commit();
+            }
+
+        }
+
         public User FindUser(string userName, string password)
         {
             User user = new User { Id = 1, UserName = userName, Password = password };

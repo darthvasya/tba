@@ -10,5 +10,6 @@ namespace tba.Services.Contracts
     public interface IUserService
     {
         User FindUser(string userName, string password);
+        void CreateUser(User user);
     }
 }

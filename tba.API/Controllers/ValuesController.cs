@@ -9,6 +9,7 @@ using tba.Services.Contracts;
 
 namespace tba.API.Controllers
 {
+
     public class ValuesController : ApiController
     {
         IUserService _userService;
@@ -20,15 +21,16 @@ namespace tba.API.Controllers
         // GET api/<controller>
         public IEnumerable<string> Get()
         {
-            _userService.FindUser("Petya", "Parol");
+           // _userService.FindUser("Petya", "Parol");
             return new string[] { "value1", "value2" };
         }
 
+        [Authorize]
         // GET api/<controller>/5
         public string Get(int id)
         {
-            User user = _userService.FindUser("Petya", "Parol");
-            return "value " + user.Id;
+            //User user = _userService.FindUser("Petya", "Parol");
+            return "value Vasya";// + user.Id;
         }
 
         // POST api/<controller>
