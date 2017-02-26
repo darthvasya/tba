@@ -18,6 +18,7 @@ namespace tba.API.App_Start
             //HttpConfiguration config = new HttpConfiguration();
             //WebApiConfig.Register(config);
             //app.UseWebApi(config);
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
         }
 
         public void ConfigureOAuth(IAppBuilder app)
