@@ -161,6 +161,7 @@
     <Compile Include="CastleDI\DependencyInstaller.cs" />
     <Compile Include="CastleDI\WindsorActivator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
