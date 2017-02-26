@@ -12,19 +12,17 @@ namespace tba.API
 {
     public class AuthRepository : IDisposable
     {
-        private TbaContext _context;
         private UserRepository _userRepository;
 
         public AuthRepository()
         {
-            _context = new TbaContext();
             _userRepository = new UserRepository(new DatabaseFactory());
         }
 
         public User FindUser(string userName, string password)
         {
             List<User> users = _userRepository.GetAll().ToList<User>();
-            User user = users.Where(p => p.UserName == userName && p.Password == password).FirstOrDefault();
+            User user = users.Where(p => p.UserName == userName && p.PasswordHash == password).FirstOrDefault();
             if (user != null)
                 return user;
             return null;
@@ -32,7 +30,6 @@ namespace tba.API
 
         public void Dispose()
         {
-            _context.Dispose();
             //
         }
     }

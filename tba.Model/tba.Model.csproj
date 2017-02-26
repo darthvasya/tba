@@ -49,6 +49,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201702251126163_InitialCreate.cs" />
+    <Compile Include="Migrations\201702251126163_InitialCreate.Designer.cs">
+      <DependentUpon>201702251126163_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702261207334_User changes.cs" />
+    <Compile Include="Migrations\201702261207334_User changes.Designer.cs">
+      <DependentUpon>201702261207334_User changes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702261211256_new.cs" />
+    <Compile Include="Migrations\201702261211256_new.Designer.cs">
+      <DependentUpon>201702261211256_new.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TbaContext.cs" />
     <Compile Include="User.cs" />
@@ -56,6 +69,17 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201702251126163_InitialCreate.resx">
+      <DependentUpon>201702251126163_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702261207334_User changes.resx">
+      <DependentUpon>201702261207334_User changes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702261211256_new.resx">
+      <DependentUpon>201702261211256_new.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

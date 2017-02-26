@@ -36,7 +36,7 @@ namespace tba.Services.Implementations
 
         public User FindUser(string userName, string password)
         {
-            User user = new User { Id = 1, UserName = userName, Password = password };
+            User user = new User { UserName = userName, PasswordHash = password };
             _userRepository.Add(user);
             _unitOfWork.Commit();
             return user;

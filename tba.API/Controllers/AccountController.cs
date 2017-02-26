@@ -31,7 +31,7 @@ namespace tba.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            User user = new User { UserName = userModel.UserName, Password = userModel.Password };
+            User user = new User { UserName = userModel.UserName, PasswordHash = userModel.Password };
             _userService.CreateUser(user);
             //IdentityResult result = await _repo.RegisterUser(userModel);
 
