@@ -7,5 +7,15 @@ app.config(function ($routeProvider) {
     templateUrl: "app/templates/home.html"
   });
 
-  
+  $routeProvider.when("/signup", {
+    controller: "signupController",
+    templateUrl: "app/templates/signup.html"
+  });
+
+  $routeProvider.otherwise({ redirectTo: "/home"});
+
 });
+
+app.run(['authService', function (authService) {
+  authService.fillAuthData();
+}]);
