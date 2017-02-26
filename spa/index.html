@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  data-ng-app="AngularAuthApp">
+<html  data-ng-app="authApp">
   <head>
     <meta charset="utf-8">
     <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
@@ -23,11 +23,10 @@
             </div>
             <div class="collapse navbar-collapse" data-collapse="!navbarExpanded">
                 <ul class="nav navbar-nav navbar-right">
-                    <!-- <li data-ng-hide="!authentication.isAuth"><a href="#">Welcome {{authentication.userName}}</a></li>
+                    <li data-ng-hide="!authentication.isAuth"><a href="#">Welcome {{authentication.userName}}</a></li>
                     <li data-ng-hide="!authentication.isAuth"><a href="#/orders">My Orders</a></li>
                     <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logout</a></li>
                     <li data-ng-hide="authentication.isAuth"> <a href="#/login">Login</a></li>
-                    <li data-ng-hide="authentication.isAuth"> <a href="#/signup">Sign Up</a></li> -->
                     <li data-ng-hide="authentication.isAuth"> <a href="#/signup">Sign Up</a></li>
                 </ul>
             </div>
@@ -40,7 +39,6 @@
             <div class="page-header text-center">
                 <h1>AngularJS Authentication</h1>
             </div>
-            <p>This single page application is built using AngularJS, it is using OAuth bearer token authentication, ASP.NET Web API 2, OWIN middleware, and ASP.NET Identity to generate tokens and register users.</p>
         </div>
     </div>
     <div class="container">
@@ -63,8 +61,10 @@
     </div>
 
     <!-- libraries -->
-    <script src="node_modules/angular/angular.min.js" charset="utf-8"></script>
-    <script src="node_modules/angular-route/angular-route.min.js" charset="utf-8"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.min.js"></script>
+    <!-- <script src="node_modules/angular/angular.min.js" charset="utf-8"></script>
+    <script src="node_modules/angular-route/angular-route.min.js" charset="utf-8"></script> -->
     <script src="node_modules/angular-local-storage/dist/angular-local-storage.min.js" charset="utf-8"></script>
     <script src="node_modules/angular-loading-bar/build/loading-bar.min.js" charset="utf-8"></script>
 
@@ -72,10 +72,16 @@
     <script src="app/app.js" charset="utf-8"></script>
 
     <!-- services -->
-    <script src="app/services/authService.js" charset="utf-8"></script>
+    <script src="app/services/authInterceptorService.js"></script>
+    <script src="app/services/authService.js"></script>
+    <script src="app/services/ordersService.js"></script>
 
     <!-- controllers -->
-    <script src="app/controllers/signupController.js" charset="utf-8"></script>
+    <script src="app/controllers/indexController.js"></script>
+    <script src="app/controllers/homeController.js"></script>
+    <script src="app/controllers/loginController.js"></script>
+    <script src="app/controllers/signupController.js"></script>
+    <script src="app/controllers/ordersController.js"></script>
 
   </body>
 </html>

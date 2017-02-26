@@ -11,7 +11,7 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
   };
 
   $scope.signUp = function () {
-
+      console.log($scope.registration);
       authService.saveRegistration($scope.registration).then(function (response) {
 
         $scope.savedSuccessfully = true;
