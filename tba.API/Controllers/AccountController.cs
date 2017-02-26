@@ -32,7 +32,7 @@ namespace tba.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            UserDTO user = new UserDTO { UserName = userModel.UserName, Password = userModel.Password };
+            RegisterUserDTO user = new RegisterUserDTO { UserName = userModel.UserName, PasswordHash = userModel.Password };
             bool created = _userService.CreateUser(user);
             if (created)
                 return Ok();

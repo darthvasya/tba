@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 using tba.Model;
 using tba.Services.Contracts;
@@ -19,6 +20,7 @@ namespace tba.API.Controllers
             _userService = userService;
         }
         // GET api/<controller>
+        [Authorize]
         public IEnumerable<string> Get()
         {
            // _userService.FindUser("Petya", "Parol");
@@ -29,8 +31,12 @@ namespace tba.API.Controllers
         // GET api/<controller>/5
         public string Get(int id)
         {
-            //User user = _userService.FindUser("Petya", "Parol");
-            return "value Vasya";// + user.Id;
+            ClaimsPrincipal principal = Request.GetRequestContext().Principal as ClaimsPrincipal;
+
+            var userName = principal.Claims.Where(c => c.Type == "sub").Single().Value;
+            var role = principal.Claims.Where(c => c.Type == "role").Single().Value;
+
+            return "userName: " + userName + " | Role: " + role ; // + user.Id;
         }
 
         // POST api/<controller>

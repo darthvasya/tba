@@ -19,10 +19,10 @@ namespace tba.API
             _userRepository = new UserRepository(new DatabaseFactory());
         }
 
-        public User FindUser(string userName, string password)
+        public User FindUser(string userName, string passwordHash)
         {
             List<User> users = _userRepository.GetAll().ToList<User>();
-            User user = users.Where(p => p.UserName == userName && p.PasswordHash == password).FirstOrDefault();
+            User user = users.Where(p => p.UserName == userName && p.PasswordHash == passwordHash).FirstOrDefault();
             if (user != null)
                 return user;
             return null;

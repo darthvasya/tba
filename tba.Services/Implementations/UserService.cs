@@ -26,15 +26,17 @@ namespace tba.Services.Implementations
             this._userRepository = userRepository;
         }
 
-        public bool CreateUser(UserDTO userDto)
+        public bool CreateUser(RegisterUserDTO userDto)
         {
             User user = new User();
 
             if (userDto != null)
             {
                 user.UserName = userDto.UserName;
+                user.PasswordHash = userDto.PasswordHash;
                 user.PhoneNumber = userDto.PhoneNumber;
-                user.PasswordHash = Crypto.GetHash(userDto.Password);
+                user.Email = userDto.Email;
+                user.DateRegistration = DateTime.Now;
 
                 _userRepository.Add(user);
                 _unitOfWork.Commit();
@@ -47,12 +49,48 @@ namespace tba.Services.Implementations
             }
         }
 
-        public User FindUser(string userName, string password)
+        public UserDTO FindUser(int userId)
         {
-            User user = new User { UserName = userName, PasswordHash = password };
-            _userRepository.Add(user);
-            _unitOfWork.Commit();
-            return user;
+            var users = _userRepository.GetAll();
+            User user = users.Where(p => p.Id == userId).FirstOrDefault();
+            if (user == null)
+                return null;
+            else
+            {
+                UserDTO userDto = new UserDTO();
+                userDto.Id = user.Id;
+                userDto.UserName = user.UserName;
+                userDto.PhoneNumber = user.PhoneNumber;
+                userDto.PhoneConfirmed = user.PhoneConfirmed;
+                userDto.Email = user.Email;
+                userDto.EmailConfirmed = user.EmailConfirmed;
+                userDto.DateRegistration = user.DateRegistration;
+                userDto.AccessFailedCount = user.AccessFailedCount;
+
+                return userDto;
+            }
+        }
+
+        public UserDTO FindUser(string userName)
+        {
+            var users = _userRepository.GetAll();
+            User user = users.Where(p => p.UserName == userName).FirstOrDefault();
+            if (user == null)
+                return null;
+            else
+            {
+                UserDTO userDto = new UserDTO();
+                userDto.Id = user.Id;
+                userDto.UserName = user.UserName;
+                userDto.PhoneNumber = user.PhoneNumber;
+                userDto.PhoneConfirmed = user.PhoneConfirmed;
+                userDto.Email = user.Email;
+                userDto.EmailConfirmed = user.EmailConfirmed;
+                userDto.DateRegistration = user.DateRegistration;
+                userDto.AccessFailedCount = user.AccessFailedCount;
+
+                return userDto;
+            }
         }
     }
 }

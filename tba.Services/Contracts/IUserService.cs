@@ -10,7 +10,8 @@ namespace tba.Services.Contracts
 {
     public interface IUserService
     {
-        User FindUser(string userName, string password);
-        bool CreateUser(UserDTO user);
+        UserDTO FindUser(string userName);
+        UserDTO FindUser(int userId);
+        bool CreateUser(RegisterUserDTO user);
     }
 }
