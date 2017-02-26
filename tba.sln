@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tba.Services", "tba.Service
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tba.API", "tba.API\tba.API.csproj", "{C01B3FF2-D2F8-42D5-B45E-83C65229E552}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tba.Common", "tba.Common\tba.Common.csproj", "{73926DC3-F0E0-449B-BE62-D7B5C7B666F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C01B3FF2-D2F8-42D5-B45E-83C65229E552}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C01B3FF2-D2F8-42D5-B45E-83C65229E552}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C01B3FF2-D2F8-42D5-B45E-83C65229E552}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73926DC3-F0E0-449B-BE62-D7B5C7B666F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73926DC3-F0E0-449B-BE62-D7B5C7B666F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73926DC3-F0E0-449B-BE62-D7B5C7B666F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73926DC3-F0E0-449B-BE62-D7B5C7B666F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

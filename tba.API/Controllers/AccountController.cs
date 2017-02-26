@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using tba.API.Models;
 using tba.Model;
+using tba.Model.DTO;
 using tba.Services.Contracts;
 
 namespace tba.API.Controllers
@@ -31,18 +32,12 @@ namespace tba.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            User user = new User { UserName = userModel.UserName, PasswordHash = userModel.Password };
-            _userService.CreateUser(user);
-            //IdentityResult result = await _repo.RegisterUser(userModel);
-
-            //IHttpActionResult errorResult = GetErrorResult(result);
-
-            //if (errorResult != null)
-            //{
-            //    return errorResult;
-            //}
-
-            return Ok();
+            UserDTO user = new UserDTO { UserName = userModel.UserName, Password = userModel.Password };
+            bool created = _userService.CreateUser(user);
+            if (created)
+                return Ok();
+            else
+                return Ok("NOOOOO");
         }
     }
 }

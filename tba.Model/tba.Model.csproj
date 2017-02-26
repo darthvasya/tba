@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="Migrations\201702251126163_InitialCreate.cs" />
     <Compile Include="Migrations\201702251126163_InitialCreate.Designer.cs">
       <DependentUpon>201702251126163_InitialCreate.cs</DependentUpon>

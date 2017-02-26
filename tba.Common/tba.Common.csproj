@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5416656E-BDBF-4CCD-AECC-3DF730F2B1A7}</ProjectGuid>
+    <ProjectGuid>{73926DC3-F0E0-449B-BE62-D7B5C7B666F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>tba.Services</RootNamespace>
-    <AssemblyName>tba.Services</AssemblyName>
+    <RootNamespace>tba.Common</RootNamespace>
+    <AssemblyName>tba.Common</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,27 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\IUserService.cs" />
-    <Compile Include="Implementations\UserService.cs" />
+    <Compile Include="Helpers\Crypto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\tba.Common\tba.Common.csproj">
-      <Project>{73926dc3-f0e0-449b-be62-d7b5c7b666f4}</Project>
-      <Name>tba.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\tba.DAL\tba.DAL.csproj">
-      <Project>{426edeeb-848c-4676-be83-f809650b916a}</Project>
-      <Name>tba.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\tba.Model\tba.Model.csproj">
-      <Project>{d34d3afb-ceff-47d6-967c-d5be2419d841}</Project>
-      <Name>tba.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\tba.Repository\tba.Repository.csproj">
-      <Project>{5e1a7b59-0e33-44cb-b021-979baa5eb5ff}</Project>
-      <Name>tba.Repository</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

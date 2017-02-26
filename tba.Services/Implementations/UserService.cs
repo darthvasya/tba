@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using tba.DAL.Contracts;
 using tba.Model;
+using tba.Model.DTO;
 using tba.Repository;
 using tba.Services.Contracts;
+using tba.Common.Helpers;
 
 namespace tba.Services.Implementations
 {
@@ -23,15 +26,25 @@ namespace tba.Services.Implementations
             this._userRepository = userRepository;
         }
 
-        public void CreateUser(User user)
+        public bool CreateUser(UserDTO userDto)
         {
+            User user = new User();
 
-            if (user != null)
+            if (userDto != null)
             {
+                user.UserName = userDto.UserName;
+                user.PhoneNumber = userDto.PhoneNumber;
+                user.PasswordHash = Crypto.GetHash(userDto.Password);
+
                 _userRepository.Add(user);
                 _unitOfWork.Commit();
-            }
 
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public User FindUser(string userName, string password)
