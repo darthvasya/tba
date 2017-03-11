@@ -1,31 +1,25 @@
 ﻿using Microsoft.Owin.Security.OAuth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
-using tba.DAL.Contracts;
-using tba.DAL.Implementations;
 using tba.Model;
-using tba.Repository;
-using tba.Services.Implementations;
 
 namespace tba.API.Providers
 {
     public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
+        /// <inheritdoc />
         public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
             context.Validated();
         }
 
+        /// <inheritdoc />
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
-            using (AuthRepository _authRepository = new AuthRepository())
+            using (var _authRepository = new AuthRepository())
             {
                 User user = _authRepository.FindUser(context.UserName, context.Password);
 

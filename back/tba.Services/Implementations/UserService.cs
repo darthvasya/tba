@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 using tba.DAL.Contracts;
 using tba.Model;
 using tba.Model.DTO;
 using tba.Repository;
 using tba.Services.Contracts;
-using tba.Common.Helpers;
 
 namespace tba.Services.Implementations
 {
     public class UserService : IUserService
     {
-        IUnitOfWork _unitOfWork;
-        IUserRepository _userRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserRepository _userRepository;
 
         public UserService(
             IUnitOfWork unitOfWork,
@@ -28,7 +23,7 @@ namespace tba.Services.Implementations
 
         public bool CreateUser(RegisterUserDTO userDto)
         {
-            User user = new User();
+            var user = new User();
 
             if (userDto != null)
             {
@@ -52,20 +47,22 @@ namespace tba.Services.Implementations
         public UserDTO FindUser(int userId)
         {
             var users = _userRepository.GetAll();
-            User user = users.Where(p => p.Id == userId).FirstOrDefault();
+            var user = users.FirstOrDefault(p => p.Id == userId);
             if (user == null)
                 return null;
             else
             {
-                UserDTO userDto = new UserDTO();
-                userDto.Id = user.Id;
-                userDto.UserName = user.UserName;
-                userDto.PhoneNumber = user.PhoneNumber;
-                userDto.PhoneConfirmed = user.PhoneConfirmed;
-                userDto.Email = user.Email;
-                userDto.EmailConfirmed = user.EmailConfirmed;
-                userDto.DateRegistration = user.DateRegistration;
-                userDto.AccessFailedCount = user.AccessFailedCount;
+                UserDTO userDto = new UserDTO
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    PhoneNumber = user.PhoneNumber,
+                    PhoneConfirmed = user.PhoneConfirmed,
+                    Email = user.Email,
+                    EmailConfirmed = user.EmailConfirmed,
+                    DateRegistration = user.DateRegistration,
+                    AccessFailedCount = user.AccessFailedCount
+                };
 
                 return userDto;
             }
@@ -74,20 +71,22 @@ namespace tba.Services.Implementations
         public UserDTO FindUser(string userName)
         {
             var users = _userRepository.GetAll();
-            User user = users.Where(p => p.UserName == userName).FirstOrDefault();
+            var user = users.FirstOrDefault(p => p.UserName == userName);
             if (user == null)
                 return null;
             else
             {
-                UserDTO userDto = new UserDTO();
-                userDto.Id = user.Id;
-                userDto.UserName = user.UserName;
-                userDto.PhoneNumber = user.PhoneNumber;
-                userDto.PhoneConfirmed = user.PhoneConfirmed;
-                userDto.Email = user.Email;
-                userDto.EmailConfirmed = user.EmailConfirmed;
-                userDto.DateRegistration = user.DateRegistration;
-                userDto.AccessFailedCount = user.AccessFailedCount;
+                var userDto = new UserDTO
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    PhoneNumber = user.PhoneNumber,
+                    PhoneConfirmed = user.PhoneConfirmed,
+                    Email = user.Email,
+                    EmailConfirmed = user.EmailConfirmed,
+                    DateRegistration = user.DateRegistration,
+                    AccessFailedCount = user.AccessFailedCount
+                };
 
                 return userDto;
             }
