@@ -14,7 +14,7 @@ namespace tba.API
 {
     public class AuthRepository : IDisposable
     {
-        private IAuthService _authService;
+        private readonly IAuthService _authService;
 
         public AuthRepository()
         {
@@ -34,22 +34,13 @@ namespace tba.API
 
         public User FindUser(string userName, string passwordHash)
         {
-            //var users = _userRepository.GetAll().ToList();
-            //var user = users.FirstOrDefault(p => p.UserName == userName && p.PasswordHash == passwordHash);
-            //return user;
-            return null;
+            var user = _authService.FindUser(userName, passwordHash);
+            return user;
         }
 
         #endregion
 
         #region Client
-
-        //public Client FindClient(string clientId)
-        //{
-        //    var client = _clientRepository.GetById(clientId);
-
-        //    return client;
-        //}
         
         #endregion
 

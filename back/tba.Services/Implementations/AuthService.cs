@@ -14,13 +14,19 @@ namespace tba.Services.Implementations
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserRepository _userRepository;
+        private readonly IRefreshTokenRepository _refreshTokenRepository;
+        private readonly IClientRepository _clientRepository;
 
         public AuthService(
             IUnitOfWork unitOfWork,
-            IUserRepository userRepository)
+            IUserRepository userRepository,
+            IRefreshTokenRepository refreshTokenRepository,
+            IClientRepository clientRepository)
         {
             this._unitOfWork = unitOfWork;
             this._userRepository = userRepository;
+            this._refreshTokenRepository = refreshTokenRepository;
+            this._clientRepository = clientRepository;
         }
 
         public User FindUser(string userId)
@@ -37,7 +43,9 @@ namespace tba.Services.Implementations
 
         public User FindUser(string userName, string passwordHash)
         {
-            throw new NotImplementedException();
+            var users = _userRepository.GetAll().ToList();
+            var user = users.FirstOrDefault(p => p.UserName == userName && p.PasswordHash == passwordHash);
+            return user;
         }
     }
 }
