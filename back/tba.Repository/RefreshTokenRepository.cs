@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using tba.DAL.Contracts;
+﻿using tba.DAL.Contracts;
 using tba.DAL.Implementations;
 using tba.Model;
 
 namespace tba.Repository
 {
-    public class UserRepository : Repository<User>, IUserRepository
+    public class RefreshTokenRepository : Repository<RefreshToken>, IRefreshTokenRepository
     {
         private TbaContext _dataContext;
 
@@ -17,7 +14,7 @@ namespace tba.Repository
             private set;
         }
 
-        public UserRepository(IDatabaseFactory databaseFactory)
+        public RefreshTokenRepository(IDatabaseFactory databaseFactory)
             : base(databaseFactory)
         {
             DatabaseFactory = databaseFactory;
@@ -29,7 +26,7 @@ namespace tba.Repository
         }
     }
 
-    public interface IUserRepository : IRepository<User>
+    public interface IRefreshTokenRepository : IRepository<RefreshToken>
     {
     }
 }

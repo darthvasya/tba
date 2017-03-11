@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using tba.Model;
-using tba.Model.DTO;
+﻿using tba.Model.DTO;
 
 namespace tba.Services.Contracts
 {

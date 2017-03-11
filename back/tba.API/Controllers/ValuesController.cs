@@ -20,11 +20,15 @@ namespace tba.API.Controllers
             _userService = userService;
         }
         // GET api/<controller>
-        [Authorize]
         public IEnumerable<string> Get()
         {
-           // _userService.FindUser("Petya", "Parol");
-            return new string[] { "value1", "value2" };
+            //using (var rep = new TestAuth())
+            //{
+            //    var user = rep.FindUser(1);
+            //    rep.Dispose();
+            //    return new string[] { user.PasswordHash, "value2" };
+            //}
+            return new string[] { "fdsa", "value2" };
         }
 
         [Authorize]
