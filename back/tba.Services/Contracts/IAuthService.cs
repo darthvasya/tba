@@ -12,5 +12,14 @@ namespace tba.Services.Contracts
         User FindUser(string userId);
         User FindUser(int userId);
         User FindUser(string userName, string passwordHash);
+
+        Client FindClient(string clientId);
+
+        void AddRefreshToken(RefreshToken token);
+        RefreshToken FindRefreshToken(string refreshTokenId);
+        List<RefreshToken> GetAllRefreshTokens();
+        bool RemoveRefreshToken(string refreshTokenId);
+        bool RemoveRefreshToken(RefreshToken refreshToken);
+
     }
 }

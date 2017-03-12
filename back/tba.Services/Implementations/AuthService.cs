@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using tba.DAL.Contracts;
 using tba.Model;
 using tba.Repository;
@@ -29,6 +27,8 @@ namespace tba.Services.Implementations
             this._clientRepository = clientRepository;
         }
 
+        #region User    
+
         public User FindUser(string userId)
         {
             throw new NotImplementedException();
@@ -47,5 +47,59 @@ namespace tba.Services.Implementations
             var user = users.FirstOrDefault(p => p.UserName == userName && p.PasswordHash == passwordHash);
             return user;
         }
+
+        #endregion
+
+        #region Client
+
+        public Client FindClient(string clientId)
+        {
+            var client = _clientRepository.GetById(clientId);
+            return client;
+        }
+
+        #endregion
+
+        #region RefreshToken
+
+
+        public RefreshToken FindRefreshToken(string refreshTokenId)
+        {
+            var refreshToken = _refreshTokenRepository.GetById(refreshTokenId);
+            return refreshToken;
+        }
+
+        public List<RefreshToken> GetAllRefreshTokens()
+        {
+            var refreshTokens = _refreshTokenRepository.GetAll().ToList();
+            return refreshTokens;
+        }
+
+        public bool RemoveRefreshToken(string refreshTokenId)
+        {
+            var refreshToken = _refreshTokenRepository.GetById(refreshTokenId);
+
+            if (refreshToken == null) return false;
+
+            _refreshTokenRepository.Delete(refreshToken);
+            _unitOfWork.Commit();
+
+            return true;
+        }
+
+        public bool RemoveRefreshToken(RefreshToken refreshToken)
+        {
+            _refreshTokenRepository.Delete(refreshToken);
+            _unitOfWork.Commit();
+
+            return true;
+        }
+
+        public void AddRefreshToken(RefreshToken token)
+        {
+            _refreshTokenRepository.Add(token);
+        }
+
+        #endregion
     }
 }
