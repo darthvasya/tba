@@ -3,6 +3,6 @@
     public enum ApplicationTypes
     {
         JavaScript = 0,
-        NativeClient = 1
+        NativeConfidential = 1
     }
 }

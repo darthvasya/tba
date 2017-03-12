@@ -188,6 +188,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\tba.Common\tba.Common.csproj">
+      <Project>{73926dc3-f0e0-449b-be62-d7b5c7b666f4}</Project>
+      <Name>tba.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\tba.DAL\tba.DAL.csproj">
       <Project>{426edeeb-848c-4676-be83-f809650b916a}</Project>
       <Name>tba.DAL</Name>
