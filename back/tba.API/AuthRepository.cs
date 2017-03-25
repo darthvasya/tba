@@ -29,6 +29,15 @@ namespace tba.API
             _authService = ninjectKernel.Get<IAuthService>();
         }
 
+        #region Helpers
+
+        public void Dispose()
+        {
+            //
+        }
+
+        #endregion
+
         #region User
 
         public User FindUser(string userName, string passwordHash)
@@ -57,9 +66,7 @@ namespace tba.API
             var existingToken = tokens.FirstOrDefault(p => p.Subject == token.Subject && p.ClientId == token.ClientId);
 
             if (existingToken != null)
-            {
                 RemoveRefreshToken(token);
-            }
 
             _authService.AddRefreshToken(token);
             return true;
@@ -77,7 +84,8 @@ namespace tba.API
 
         public bool RemoveRefreshToken(RefreshToken refreshToken)
         {
-            return _authService.RemoveRefreshToken(refreshToken); ;
+            return _authService.RemoveRefreshToken(refreshToken);
+            ;
         }
 
         public RefreshToken FindRefreshToken(string refreshTokenId)
@@ -93,15 +101,5 @@ namespace tba.API
         }
 
         #endregion
-
-        #region Helpers
-
-        public void Dispose()
-        {
-            //
-        }
-
-        #endregion
-
     }
 }
