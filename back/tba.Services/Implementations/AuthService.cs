@@ -98,6 +98,7 @@ namespace tba.Services.Implementations
         public void AddRefreshToken(RefreshToken token)
         {
             _refreshTokenRepository.Add(token);
+            _unitOfWork.Commit();
         }
 
         #endregion

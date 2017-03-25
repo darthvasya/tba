@@ -69,6 +69,7 @@ namespace tba.API
                 RemoveRefreshToken(token);
 
             _authService.AddRefreshToken(token);
+            
             return true;
         }
 

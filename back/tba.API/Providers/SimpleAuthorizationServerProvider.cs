@@ -40,19 +40,19 @@ namespace tba.API.Providers
                 return Task.FromResult<object>(null);
             }
 
-            if (client.ApplicationType == ApplicationTypes.NativeConfidential) ;
-            {
-                if (string.IsNullOrWhiteSpace(clientSecret))
-                {
-                    context.SetError("invalid_clientId", "Client secret should be sent.");
-                    return Task.FromResult<object>(null);
-                }
-                if (client.Secret != Crypto.GetHash(clientSecret))
-                {
-                    context.SetError("invalid_clientId", "Client secret is invalid.");
-                    return Task.FromResult<object>(null);
-                }
-            }
+            //if (client.ApplicationType == ApplicationTypes.NativeConfidential) ;
+            //{
+            //    if (string.IsNullOrWhiteSpace(clientSecret))
+            //    {
+            //        context.SetError("invalid_clientId", "Client secret should be sent.");
+            //        return Task.FromResult<object>(null);
+            //    }
+            //    if (client.Secret != Crypto.GetHash(clientSecret))
+            //    {
+            //        context.SetError("invalid_clientId", "Client secret is invalid.");
+            //        return Task.FromResult<object>(null);
+            //    }
+            //}
 
             if (!client.Active)
             {
@@ -73,6 +73,8 @@ namespace tba.API.Providers
             var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin");
 
             if (allowedOrigin == null) allowedOrigin = "*";
+
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] {allowedOrigin});
 
             using (var _authRepository = new AuthRepository())
             {
@@ -108,6 +110,27 @@ namespace tba.API.Providers
         {
             foreach (var property in context.Properties.Dictionary)
                 context.AdditionalResponseParameters.Add(property.Key, property.Value);
+
+            return Task.FromResult<object>(null);
+        }
+
+        public override Task GrantRefreshToken(OAuthGrantRefreshTokenContext context)
+        {
+            var originalClient = context.Ticket.Properties.Dictionary["as:client_id"];
+            var currentClient = context.ClientId;
+
+            if (originalClient != currentClient)
+            {
+                context.SetError("invalid_clientId", "Refresh token is issued to a different clientId.");
+                return Task.FromResult<object>(null);
+            }
+
+            // Change auth ticket for refresh token requests
+            var newIdentity = new ClaimsIdentity(context.Ticket.Identity);
+            newIdentity.AddClaim(new Claim("newClaim", "newValue"));
+
+            var newTicket = new AuthenticationTicket(newIdentity, context.Ticket.Properties);
+            context.Validated(newTicket);
 
             return Task.FromResult<object>(null);
         }
