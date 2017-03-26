@@ -7,6 +7,11 @@ app.config(function ($routeProvider) {
     templateUrl: "/app/templates/home.html"
   });
 
+  $routeProvider.when("/refresh", {
+    controller: "refreshController",
+    templateUrl: "/app/templates/refresh.html"
+  });
+
   $routeProvider.when("/login", {
     controller: "loginController",
     templateUrl: "/app/templates/login.html"

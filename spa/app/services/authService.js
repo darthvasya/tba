@@ -22,7 +22,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
   let _login = function (loginData) {
 
-    let data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
+    let data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password + "&client_id=" + clientId;
 
     let deferred = $q.defer();
 
@@ -36,7 +36,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
       deferred.resolve(response);
     }).error(function (err, status) {
-      _logOut();
+      //_logOut();
       deferred.reject(err);
     });
 
@@ -64,7 +64,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
   };
 
   let _refreshToken = function () {
-    let deferred = $q.deffer();
+    let deferred = $q.defer();
     let authData = localStorageService.get('authorizationData');
 
     if(authData) {
@@ -81,7 +81,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
       });
 
     }
-    return deffered.promise;
+    return deferred.promise;
   }
 
   authServiceFactory.saveRegistration = _saveRegistration;
