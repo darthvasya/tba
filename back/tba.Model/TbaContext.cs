@@ -10,6 +10,8 @@ namespace tba.Model
     public class TbaContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<Client> Clients { get; set; }
 
         public TbaContext()
             : base("DefaultConnection")
