@@ -1,9 +1,5 @@
 var app = angular.module("authApp", ['ngRoute', 'LocalStorageModule', 'angular-loading-bar']);
 
-app.config(function ($httpProvider) {
-    $httpProvider.interceptors.push('authInterceptorService');
-});
-
 app.config(function ($routeProvider) {
 
   $routeProvider.when("/home", {
@@ -28,6 +24,15 @@ app.config(function ($routeProvider) {
 
   $routeProvider.otherwise({ redirectTo: "/home"});
 
+});
+
+app.constant('ngAuthSettings', {
+    apiServiceBaseUri: "http://localhost:58429/",
+    clientId: 'ngAuthApp'
+});
+
+app.config(function ($httpProvider) {
+    $httpProvider.interceptors.push('authInterceptorService');
 });
 
 app.run(['authService', function (authService) {
