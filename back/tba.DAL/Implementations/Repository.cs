@@ -33,6 +33,7 @@ namespace tba.DAL.Implementations
         public virtual void Add(T entity)
         {
             dbset.Add(entity);
+            DataContext.SaveChanges();
         }
         public virtual void Update(T entity)
         {

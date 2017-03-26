@@ -68,6 +68,10 @@
     <Compile Include="Migrations\201703111635523_Add refresh-roken infrastructure.Designer.cs">
       <DependentUpon>201703111635523_Add refresh-roken infrastructure.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703260819392_update.cs" />
+    <Compile Include="Migrations\201703260819392_update.Designer.cs">
+      <DependentUpon>201703260819392_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RefreshToken.cs" />
@@ -90,6 +94,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703111635523_Add refresh-roken infrastructure.resx">
       <DependentUpon>201703111635523_Add refresh-roken infrastructure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703260819392_update.resx">
+      <DependentUpon>201703260819392_update.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

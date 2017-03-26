@@ -68,9 +68,26 @@ namespace tba.API.Providers
             }
         }
 
-        public Task ReceiveAsync(AuthenticationTokenReceiveContext context)
+        public async Task ReceiveAsync(AuthenticationTokenReceiveContext context)
         {
-            throw new NotImplementedException();
+            var allowedOrigin = context.OwinContext.Get<string>("as:clientAllowedOrigin");
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
+
+            string hashedTokenId = Crypto.GetHash(context.Token);
+
+            using (AuthRepository _repo = new AuthRepository())
+            {
+                var refreshToken = _repo.FindRefreshToken(hashedTokenId);
+
+                if (refreshToken != null)
+                {
+                    //Get protectedTicket from refreshToken class
+                    context.DeserializeTicket(refreshToken.ProtectedTicket);
+                    var result = _repo.RemoveRefreshToken(hashedTokenId);
+                }
+              
+            }
+
         }
     }
 }

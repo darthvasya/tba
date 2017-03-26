@@ -14,6 +14,7 @@ namespace tba.API
     public class AuthRepository : IDisposable
     {
         private readonly IAuthService _authService;
+        private readonly IRefreshTokenRepository _refreshTokenRepository;
 
         public AuthRepository()
         {
@@ -27,6 +28,7 @@ namespace tba.API
             ninjectKernel.Bind<IRefreshTokenRepository>().To<RefreshTokenRepository>();
 
             _authService = ninjectKernel.Get<IAuthService>();
+            _refreshTokenRepository = ninjectKernel.Get<IRefreshTokenRepository>();
         }
 
         #region Helpers
@@ -68,7 +70,9 @@ namespace tba.API
             if (existingToken != null)
                 RemoveRefreshToken(token);
 
-            _authService.AddRefreshToken(token);
+            token.Subject = "s";
+            _refreshTokenRepository.Add(token);
+           // _authService.AddRefreshToken(token);
             
             return true;
         }
