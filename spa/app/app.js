@@ -1,14 +1,15 @@
 var app = angular.module("authApp", ['ngRoute', 'LocalStorageModule', 'angular-loading-bar']);
 
-app.config(function ($httpProvider) {
-    $httpProvider.interceptors.push('authInterceptorService');
-});
-
 app.config(function ($routeProvider) {
 
   $routeProvider.when("/home", {
     controller: "homeController",
     templateUrl: "/app/templates/home.html"
+  });
+
+  $routeProvider.when("/refresh", {
+    controller: "refreshController",
+    templateUrl: "/app/templates/refresh.html"
   });
 
   $routeProvider.when("/login", {
@@ -28,6 +29,15 @@ app.config(function ($routeProvider) {
 
   $routeProvider.otherwise({ redirectTo: "/home"});
 
+});
+
+app.constant('ngAuthSettings', {
+    apiServiceBaseUri: "http://localhost:58429/",
+    clientId: 'ngAuthApp'
+});
+
+app.config(function ($httpProvider) {
+    $httpProvider.interceptors.push('authInterceptorService');
 });
 
 app.run(['authService', function (authService) {

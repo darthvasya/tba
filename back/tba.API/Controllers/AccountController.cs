@@ -34,6 +34,7 @@ namespace tba.API.Controllers
 
             RegisterUserDTO user = new RegisterUserDTO { UserName = userModel.UserName, PasswordHash = userModel.Password };
             bool created = _userService.CreateUser(user);
+
             if (created)
                 return Ok();
             else

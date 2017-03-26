@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IAuthService.cs" />
     <Compile Include="Contracts\IUserService.cs" />
+    <Compile Include="Implementations\AuthService.cs" />
     <Compile Include="Implementations\UserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
