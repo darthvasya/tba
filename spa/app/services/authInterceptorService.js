@@ -22,7 +22,9 @@ app.factory('authInterceptorService', ['$q', '$injector', '$location', 'localSto
       let authData = localStorageService.get('authorizationData');
 
       if (authData) {
-        $location.path('/refresh');
+        authService.refreshToken();
+        //нужно подождать collback
+        //$location.path('/refresh');
         return $q.reject(rejection);
       }
       authService.logOut();
