@@ -79,11 +79,15 @@ namespace tba.API
 
         public bool RemoveRefreshToken(string refreshTokenId)
         {
-            var refreshToken = _authService.FindRefreshToken(refreshTokenId);
+            RefreshToken refreshToken = new RefreshToken();
+            refreshToken = _authService.FindRefreshToken(refreshTokenId);
 
             if (refreshToken == null) return false;
 
-            _authService.RemoveRefreshToken(refreshToken);
+           // _authService.RemoveRefreshToken(refreshToken);
+           _refreshTokenRepository.Delete(refreshToken);
+            
+
             return true;
         }
 

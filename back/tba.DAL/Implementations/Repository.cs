@@ -42,7 +42,9 @@ namespace tba.DAL.Implementations
         }
         public virtual void Delete(T entity)
         {
-            dbset.Remove(entity);
+            dbset.Attach(entity);
+            dataContext.Entry(entity).State = EntityState.Deleted;
+            DataContext.SaveChanges();
         }
         public virtual void Delete(Expression<Func<T, bool>> where)
         {

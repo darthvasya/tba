@@ -59,7 +59,9 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     {
       _authentification.isAuth = true;
       _authentification.userName = authData.userName;
+      _authentification.refreshToken = authData.refreshToken;
     }
+    console.log(_authentification + "fil");
 
   };
 
@@ -74,6 +76,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
       $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
           localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: response.refresh_token });
+          _fillAuthData();
           deferred.resolve(response);
       }).error(function (err, status) {
           _logOut();
@@ -84,12 +87,19 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     return deferred.promise;
   }
 
+  let _deleteRefreshToken = function (tokenId) {
+    return $http.delete(serviceBase + "api/RefreshTokens?tokenId=" + tokenId).then(function (result) {
+      return result;
+    })
+  }
+
   authServiceFactory.saveRegistration = _saveRegistration;
   authServiceFactory.login = _login;
   authServiceFactory.logOut = _logOut;
   authServiceFactory.fillAuthData = _fillAuthData;
   authServiceFactory.refreshToken = _refreshToken;
   authServiceFactory.authentification = _authentification;
+  authServiceFactory.deleteRefreshToken = _deleteRefreshToken;
 
   return authServiceFactory;
 
