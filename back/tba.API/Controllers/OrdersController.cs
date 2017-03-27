@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
+using tba.API.Filters;
 
 namespace tba.API.Controllers
 {
@@ -11,9 +13,11 @@ namespace tba.API.Controllers
     public class OrdersController : ApiController
     {
         [Authorize]
+        [MyAuth("Vasya")]
         [Route("")]
         public IHttpActionResult Get()
         {
+
             return Ok(Order.CreateOrders());
         }
 

@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
+using tba.API.Filters;
 using tba.Model;
 using tba.Services.Contracts;
 
@@ -20,6 +21,7 @@ namespace tba.API.Controllers
             _userService = userService;
         }
         // GET api/<controller>
+        [MyAuth]
         public IEnumerable<string> Get()
         {
             //using (var rep = new TestAuth())
