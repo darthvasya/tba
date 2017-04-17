@@ -17,17 +17,19 @@ app.factory('authInterceptorService', ['$q', '$injector', '$location', 'localSto
 
   let _responseError = function (rejection) {
     if(rejection.status === 401) {
-
+      console.log(1);
       let authService = $injector.get('authService');
       let authData = localStorageService.get('authorizationData');
 
       if (authData) {
         authService.refreshToken();
+        console.log("REFRESH");
         //нужно подождать collback
         //$location.path('/refresh');
         return $q.reject(rejection);
       }
-      authService.logOut();
+
+      //authService.logOut();
 
       $location.path('/login');
     }

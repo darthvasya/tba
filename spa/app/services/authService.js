@@ -14,7 +14,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
   let _saveRegistration = function (registration) {
     _logOut();
 
-    return $http.post(serviceBase + "api/account/register", registration).then(function (response) {
+    return $http.post(serviceBase + "api/users/register", registration).then(function (response) {
       return response;
     });
 
@@ -23,7 +23,6 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
   let _login = function (loginData) {
 
     let data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password + "&client_id=" + clientId;
-
     let deferred = $q.defer();
 
     $http.post(serviceBase + "token", data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded'} })
@@ -60,8 +59,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
       _authentification.isAuth = true;
       _authentification.userName = authData.userName;
       _authentification.refreshToken = authData.refreshToken;
+      console.log(_authentification + "fil");
     }
-    console.log(_authentification + "fil");
 
   };
 
@@ -70,8 +69,9 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     let authData = localStorageService.get('authorizationData');
 
     if(authData) {
-
+      console.log(authData);
       var data = "grant_type=refresh_token&refresh_token=" + authData.refreshToken + "&client_id=" + clientId;
+      console.log(data);
       localStorageService.remove('authorizationData');
 
       $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
@@ -79,7 +79,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
           _fillAuthData();
           deferred.resolve(response);
       }).error(function (err, status) {
-          _logOut();
+          //_logOut();
+          console.log(err);
           deferred.reject(err);
       });
 

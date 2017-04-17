@@ -32,8 +32,8 @@ app.config(function ($routeProvider) {
 });
 
 app.constant('ngAuthSettings', {
-    apiServiceBaseUri: "http://localhost:58429/",
-    clientId: 'ngAuthApp'
+    apiServiceBaseUri: "http://lord17-001-site1.ctempurl.com/",
+    clientId: 'jsApp'
 });
 
 app.config(function ($httpProvider) {
